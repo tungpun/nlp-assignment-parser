@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="CoreNLP-to-HTML.xsl" type="text/xsl"?>
+<root>
+  <document>
+    <sentences>
+      <sentence id="1">
+        <tokens>
+          <token id="1">
+            <word>By</word>
+            <CharacterOffsetBegin>0</CharacterOffsetBegin>
+            <CharacterOffsetEnd>2</CharacterOffsetEnd>
+            <POS>IN</POS>
+          </token>
+          <token id="2">
+            <word>default</word>
+            <CharacterOffsetBegin>3</CharacterOffsetBegin>
+            <CharacterOffsetEnd>10</CharacterOffsetEnd>
+            <POS>NN</POS>
+          </token>
+          <token id="3">
+            <word>,</word>
+            <CharacterOffsetBegin>10</CharacterOffsetBegin>
+            <CharacterOffsetEnd>11</CharacterOffsetEnd>
+            <POS>,</POS>
+          </token>
+          <token id="4">
+            <word>output</word>
+            <CharacterOffsetBegin>12</CharacterOffsetBegin>
+            <CharacterOffsetEnd>18</CharacterOffsetEnd>
+            <POS>NN</POS>
+          </token>
+          <token id="5">
+            <word>files</word>
+            <CharacterOffsetBegin>19</CharacterOffsetBegin>
+            <CharacterOffsetEnd>24</CharacterOffsetEnd>
+            <POS>NNS</POS>
+          </token>
+          <token id="6">
+            <word>are</word>
+            <CharacterOffsetBegin>25</CharacterOffsetBegin>
+            <CharacterOffsetEnd>28</CharacterOffsetEnd>
+            <POS>VBP</POS>
+          </token>
+          <token id="7">
+            <word>written</word>
+            <CharacterOffsetBegin>29</CharacterOffsetBegin>
+            <CharacterOffsetEnd>36</CharacterOffsetEnd>
+            <POS>VBN</POS>
+          </token>
+          <token id="8">
+            <word>to</word>
+            <CharacterOffsetBegin>37</CharacterOffsetBegin>
+            <CharacterOffsetEnd>39</CharacterOffsetEnd>
+            <POS>TO</POS>
+          </token>
+          <token id="9">
+            <word>the</word>
+            <CharacterOffsetBegin>40</CharacterOffsetBegin>
+            <CharacterOffsetEnd>43</CharacterOffsetEnd>
+            <POS>DT</POS>
+          </token>
+          <token id="10">
+            <word>current</word>
+            <CharacterOffsetBegin>44</CharacterOffsetBegin>
+            <CharacterOffsetEnd>51</CharacterOffsetEnd>
+            <POS>JJ</POS>
+          </token>
+          <token id="11">
+            <word>directory</word>
+            <CharacterOffsetBegin>52</CharacterOffsetBegin>
+            <CharacterOffsetEnd>61</CharacterOffsetEnd>
+            <POS>NN</POS>
+          </token>
+          <token id="12">
+            <word>.</word>
+            <CharacterOffsetBegin>61</CharacterOffsetBegin>
+            <CharacterOffsetEnd>62</CharacterOffsetEnd>
+            <POS>.</POS>
+          </token>
+        </tokens>
+        <parse>(ROOT (S (PP (IN By) (NP (NN default))) (, ,) (NP (NN output) (NNS files)) (VP (VBP are) (VP (VBN written) (PP (TO to) (NP (DT the) (JJ current) (NN directory))))) (. .))) </parse>
+        <dependencies type="basic-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="7">written</dependent>
+          </dep>
+          <dep type="case">
+            <governor idx="2">default</governor>
+            <dependent idx="1">By</dependent>
+          </dep>
+          <dep type="nmod">
+            <governor idx="7">written</governor>
+            <dependent idx="2">default</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="5">files</governor>
+            <dependent idx="4">output</dependent>
+          </dep>
+          <dep type="nsubjpass">
+            <governor idx="7">written</governor>
+            <dependent idx="5">files</dependent>
+          </dep>
+          <dep type="auxpass">
+            <governor idx="7">written</governor>
+            <dependent idx="6">are</dependent>
+          </dep>
+          <dep type="case">
+            <governor idx="11">directory</governor>
+            <dependent idx="8">to</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="11">directory</governor>
+            <dependent idx="9">the</dependent>
+          </dep>
+          <dep type="amod">
+            <governor idx="11">directory</governor>
+            <dependent idx="10">current</dependent>
+          </dep>
+          <dep type="nmod">
+            <governor idx="7">written</governor>
+            <dependent idx="11">directory</dependent>
+          </dep>
+        </dependencies>
+        <dependencies type="collapsed-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="7">written</dependent>
+          </dep>
+          <dep type="case">
+            <governor idx="2">default</governor>
+            <dependent idx="1">By</dependent>
+          </dep>
+          <dep type="nmod:agent">
+            <governor idx="7">written</governor>
+            <dependent idx="2">default</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="5">files</governor>
+            <dependent idx="4">output</dependent>
+          </dep>
+          <dep type="nsubjpass">
+            <governor idx="7">written</governor>
+            <dependent idx="5">files</dependent>
+          </dep>
+          <dep type="auxpass">
+            <governor idx="7">written</governor>
+            <dependent idx="6">are</dependent>
+          </dep>
+          <dep type="case">
+            <governor idx="11">directory</governor>
+            <dependent idx="8">to</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="11">directory</governor>
+            <dependent idx="9">the</dependent>
+          </dep>
+          <dep type="amod">
+            <governor idx="11">directory</governor>
+            <dependent idx="10">current</dependent>
+          </dep>
+          <dep type="nmod:to">
+            <governor idx="7">written</governor>
+            <dependent idx="11">directory</dependent>
+          </dep>
+        </dependencies>
+        <dependencies type="collapsed-ccprocessed-dependencies">
+          <dep type="root">
+            <governor idx="0">ROOT</governor>
+            <dependent idx="7">written</dependent>
+          </dep>
+          <dep type="case">
+            <governor idx="2">default</governor>
+            <dependent idx="1">By</dependent>
+          </dep>
+          <dep type="nmod:agent">
+            <governor idx="7">written</governor>
+            <dependent idx="2">default</dependent>
+          </dep>
+          <dep type="compound">
+            <governor idx="5">files</governor>
+            <dependent idx="4">output</dependent>
+          </dep>
+          <dep type="nsubjpass">
+            <governor idx="7">written</governor>
+            <dependent idx="5">files</dependent>
+          </dep>
+          <dep type="auxpass">
+            <governor idx="7">written</governor>
+            <dependent idx="6">are</dependent>
+          </dep>
+          <dep type="case">
+            <governor idx="11">directory</governor>
+            <dependent idx="8">to</dependent>
+          </dep>
+          <dep type="det">
+            <governor idx="11">directory</governor>
+            <dependent idx="9">the</dependent>
+          </dep>
+          <dep type="amod">
+            <governor idx="11">directory</governor>
+            <dependent idx="10">current</dependent>
+          </dep>
+          <dep type="nmod:to">
+            <governor idx="7">written</governor>
+            <dependent idx="11">directory</dependent>
+          </dep>
+        </dependencies>
+      </sentence>
+    </sentences>
+  </document>
+</root>
