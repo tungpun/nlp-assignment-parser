@@ -5,7 +5,7 @@ Supported parser:
 * Shift-Reduce Parser
 * Neural Network Parser
 
-## HOW TO USE
+## How to use
 * Clone this repository
 * Github does not allow pushing big file to its service, so you should download some files: [stanford-srparser-2014-10-23-models.jar](http://nlp.stanford.edu/software/stanford-srparser-2014-10-23-models.jar), [stanford-corenlp-2015-04-20-models.jar](http://nlp.stanford.edu/software/stanford-corenlp-2015-04-20-models.jar)
 * Install `Java 1.8+`
@@ -50,3 +50,5 @@ Total time for StanfordCoreNLP pipeline: 191.5 sec.
 
 XML Report Output
 ![Output](http://i.imgur.com/6blLub9.jpg)
+
+> Find me on [Twitter](https://twitter.com/tungpun_)
