@@ -18,7 +18,7 @@ Supported parsers:
 ~ python doit.py
 [+] Input Data: "By default, output files are written to the current directory."
 
-Choose parser [lex/sr]: sr
+Choose parser [lex/sr/nn]: sr
 ['java', '-cp', '"*"', '-Xmx1500m', 'edu.stanford.nlp.pipeline.StanfordCoreNLP', '-annotators', 'tokenizarse', '-parse.model', 'edu/stanford/nlp/models/srparser/englishSR.ser.gz', '-file', 'input.txt']
 Adding annotator tokenize
 TokenizerAnnotator: No tokenizer type provided. Defaulting to PTBTokenizer.
