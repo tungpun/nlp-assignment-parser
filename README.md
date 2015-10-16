@@ -1,6 +1,9 @@
 ## Introduction
 This is our assignment for NLP's course
-Supported parser: Lexiclized Parser, Shift-Reduce Parser, Neural Network Parser
+Supported parser:
+* Lexiclized Parser
+* Shift-Reduce Parser
+* Neural Network Parser
 
 ## HOW TO USE
 * Clone this repository
