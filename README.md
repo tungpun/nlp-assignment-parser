@@ -7,7 +7,13 @@ This is our assignment for NLP's course
 * Run `python doit.py` (python2.7)
 
 ## Sample output
+
+XML Report Output
+![Output](http://i.imgur.com/6blLub9.jpg)
+
+
 ```
+~ python doit.py
 [+] Input Data: "By default, output files are written to the current directory."
 
 Choose parser [lex/sr]: sr
@@ -39,6 +45,3 @@ Total time for StanfordCoreNLP pipeline: 191.5 sec.
 [+] Output report is saved to input.txt.xml . You can open with MS Excel for more detail or view a brief
 [+] Parse tree: (ROOT (S (PP (IN By) (NP (NN default))) (, ,) (NP (NN output) (NNS files)) (VP (VBP are)ten) (PP (TO to) (NP (DT the) (JJ current) (NN directory))))) (. .))) </
 ```
-
-XML Report Output
-[Output](http://i.imgur.com/6blLub9.jpg)
