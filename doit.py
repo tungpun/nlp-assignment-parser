@@ -8,19 +8,25 @@ DEBUG = True
 JAVABUFFER = '-Xmx1500m'
 INPUTFILE = 'input.txt'
 
+
 def check_requirement():
     """
     #TODO
     """
     return 0
 
+
 def print_input():
     try:
         with open('input.txt', 'r') as f:
             data = f.read()
             print '[+] Input Data: \"' + data.strip() + '\"\n'        
+        with open('input.txt.xml', 'w') as f:
+            f.write("")
+            print '[+] Outfile cleaned:', INPUTFILE + '.xml\n'        
     except:
         raise Exception("IO Error! Check input file!")
+
 
 def run(cmd):
     try:
@@ -28,6 +34,7 @@ def run(cmd):
         os.popen(cmd)
     except:
         raise Exception("Error when try running ", cmd)
+
 
 def lex_parser():
     """
@@ -41,6 +48,7 @@ def lex_parser():
     except:
         raise Exception('Failed. Quit now!!!')
     return 0
+
 
 def shift_reduce():
     """
@@ -56,6 +64,7 @@ def shift_reduce():
         raise Exception('Failed. Quit now!!!')
     return 0
 
+
 def neural_network_parser():
     """
     Get input from INPUTFILE
@@ -70,41 +79,50 @@ def neural_network_parser():
         raise Exception('Failed. Quit now!!!')
     return 0
 
+
 def get_parse_tree(data):
     """
     for parsing xml content to console
     now, we just return parse tree
-    """
-    parsetree = []
-    datadict = xmltodict.parse(data)        
+    """    
+    parsetrees = []
     s_id = 0
+
+    datadict = xmltodict.parse(data)            
 
     try:
         for sentence in datadict['root']['document']['sentences']['sentence']:                    
             s_id += 1
-            parsetree.append(sentence['parse'])
+            parsetrees.append(sentence['parse'])
             # return json.dumps(datadict, indent=2)
     except:
-        parsetree.append(datadict['root']['document']['sentences']['sentence']['parse'])      # when input just contains oneline
+        parsetrees.append(datadict['root']['document']['sentences']['sentence']['parse'])      # when input just contains oneline
         pass
 
-    return parsetree
+    return parsetrees 
+
 
 def read_output():
     """
     Read output report from INPUTFILE.xml
     """  
-    OUTPUTFILE = INPUTFILE + '.xml'
-    print '[+] Output report is saved to', OUTPUTFILE, '. You can open with MS Excel for more detail or view a brief as below.'
-    with open(OUTPUTFILE, 'r') as f:
-        data = f.read()        
-        print "\n[+] Parse tree:"
-        parsetrees = get_parse_tree(data)
-        cnt = 0
-        for parsetree in parsetrees:            
-            print '   [' + str(cnt) + ']', parsetree, '\n'
-            cnt += 1
+    OUTPUTFILE = INPUTFILE + '.xml'    
+    try:
+        with open(OUTPUTFILE, 'r') as f:
+            data = f.read()        
+            if data == "":
+                raise Exception("Something wrongs ! Check log and report to developer!!!")        
+            print '[+] Output report is saved to', OUTPUTFILE, '. You can open with MS Excel for more detail or view a brief as below.'
+            print "\n[+] Parse tree:"
+            parsetrees = get_parse_tree(data)
+            cnt = 0
+            for parsetree in parsetrees:            
+                print '   [' + str(cnt) + ']', parsetree, '\n'
+                cnt += 1
+    except:
+        raise Exception("Something wrongs ! Check log and report to developer!!!")
     return 0
+
 
 if __name__ == '__main__':    
     check_requirement()
