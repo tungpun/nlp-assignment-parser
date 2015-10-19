@@ -1,6 +1,8 @@
 #!/usr/bin python 2.7
 
 import os
+import xmltodict
+import json
 
 DEBUG = True
 JAVABUFFER = '-Xmx1500m'
@@ -32,7 +34,6 @@ def lex_parser():
         print "[+] Parsing completed\n"
     except:
         raise Exception('Failed. Quit now!!!')
-
     return 0
 
 def shift_reduce():
@@ -47,7 +48,6 @@ def shift_reduce():
         print "[+] Parsing completed\n"
     except:
         raise Exception('Failed. Quit now!!!')
-
     return 0
 
 def neural_network_parser():
@@ -62,13 +62,17 @@ def neural_network_parser():
         print "[+] Parsing completed\n"
     except:
         raise Exception('Failed. Quit now!!!')
-
     return 0
 
 def get_parse_tree(data):
-    assert ("<parse>" in data)
-    tree = data.split('parse>')[1]
-    return tree
+    """
+    for parsing xml content to console
+    now, we just return parse tree
+    """
+    datadict = xmltodict.parse(data)
+    parsetree = datadict['root']['document']['sentences']['sentence']['parse']
+    # return json.dumps(datadict, indent=2)
+    return parsetree
 
 def read_output():
     """
