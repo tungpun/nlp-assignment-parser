@@ -15,13 +15,19 @@ def check_requirement():
     return 0
 
 def print_input():
-    with open('input.txt', 'r') as f:
-        data = f.read()
-        print '[+] Input Data: \"' + data + '\"\n'        
+    try:
+        with open('input.txt', 'r') as f:
+            data = f.read()
+            print '[+] Input Data: \"' + data.strip() + '\"\n'        
+    except:
+        raise Exception("IO Error! Check input file!")
 
 def run(cmd):
-    print cmd.split(' ')
-    os.popen(cmd)
+    try:
+        print cmd.split(' ')
+        os.popen(cmd)
+    except:
+        raise Exception("Error when try running ", cmd)
 
 def lex_parser():
     """
@@ -69,9 +75,19 @@ def get_parse_tree(data):
     for parsing xml content to console
     now, we just return parse tree
     """
-    datadict = xmltodict.parse(data)
-    parsetree = datadict['root']['document']['sentences']['sentence']['parse']
-    # return json.dumps(datadict, indent=2)
+    parsetree = []
+    datadict = xmltodict.parse(data)        
+    s_id = 0
+
+    try:
+        for sentence in datadict['root']['document']['sentences']['sentence']:                    
+            s_id += 1
+            parsetree.append(sentence['parse'])
+            # return json.dumps(datadict, indent=2)
+    except:
+        parsetree.append(datadict['root']['document']['sentences']['sentence']['parse'])      # when input just contains oneline
+        pass
+
     return parsetree
 
 def read_output():
@@ -81,9 +97,13 @@ def read_output():
     OUTPUTFILE = INPUTFILE + '.xml'
     print '[+] Output report is saved to', OUTPUTFILE, '. You can open with MS Excel for more detail or view a brief as below.'
     with open(OUTPUTFILE, 'r') as f:
-        data = f.read()
-        #print "[+] OUTPUT:", data
-        print "[+] Parse tree:\n" + get_parse_tree(data)
+        data = f.read()        
+        print "\n[+] Parse tree:"
+        parsetrees = get_parse_tree(data)
+        cnt = 0
+        for parsetree in parsetrees:            
+            print '   [' + str(cnt) + ']', parsetree, '\n'
+            cnt += 1
     return 0
 
 if __name__ == '__main__':    

@@ -45,7 +45,7 @@ Total time for StanfordCoreNLP pipeline: 191.5 sec.
 [+] Parsing completed
 
 [+] Output report is saved to input.txt.xml . You can open with MS Excel for more detail or view a brief
-[+] Parse tree: (ROOT (S (PP (IN By) (NP (NN default))) (, ,) (NP (NN output) (NNS files)) (VP (VBP are)ten) (PP (TO to) (NP (DT the) (JJ current) (NN directory))))) (. .))) </
+[+] Parse tree: (ROOT (S (PP (IN By) (NP (NN default))) (, ,) (NP (NN output) (NNS files)) (VP (VBP are)ten) (PP (TO to) (NP (DT the) (JJ current) (NN directory))))) (. .)))
 ```
 
 
