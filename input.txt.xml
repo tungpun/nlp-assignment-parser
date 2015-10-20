@@ -78,7 +78,6 @@
             <POS>.</POS>
           </token>
         </tokens>
-        <parse>(ROOT (S (PP (IN By) (NP (NN default))) (, ,) (NP (NN output) (NNS files)) (VP (VBP are) (VP (VBN written) (PP (TO to) (NP (DT the) (JJ current) (NN directory))))) (. .))) </parse>
         <dependencies type="basic-dependencies">
           <dep type="root">
             <governor idx="0">ROOT</governor>
@@ -91,6 +90,10 @@
           <dep type="nmod">
             <governor idx="7">written</governor>
             <dependent idx="2">default</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">written</governor>
+            <dependent idx="3">,</dependent>
           </dep>
           <dep type="compound">
             <governor idx="5">files</governor>
@@ -119,6 +122,10 @@
           <dep type="nmod">
             <governor idx="7">written</governor>
             <dependent idx="11">directory</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">written</governor>
+            <dependent idx="12">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-dependencies">
@@ -134,6 +141,10 @@
             <governor idx="7">written</governor>
             <dependent idx="2">default</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="7">written</governor>
+            <dependent idx="3">,</dependent>
+          </dep>
           <dep type="compound">
             <governor idx="5">files</governor>
             <dependent idx="4">output</dependent>
@@ -161,6 +172,10 @@
           <dep type="nmod:to">
             <governor idx="7">written</governor>
             <dependent idx="11">directory</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">written</governor>
+            <dependent idx="12">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-ccprocessed-dependencies">
@@ -176,6 +191,10 @@
             <governor idx="7">written</governor>
             <dependent idx="2">default</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="7">written</governor>
+            <dependent idx="3">,</dependent>
+          </dep>
           <dep type="compound">
             <governor idx="5">files</governor>
             <dependent idx="4">output</dependent>
@@ -203,6 +222,10 @@
           <dep type="nmod:to">
             <governor idx="7">written</governor>
             <dependent idx="11">directory</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="7">written</governor>
+            <dependent idx="12">.</dependent>
           </dep>
         </dependencies>
       </sentence>
@@ -317,7 +340,6 @@
             <POS>.</POS>
           </token>
         </tokens>
-        <parse>(ROOT (S (SBAR (RB Once) (S (NP (DT an) (NN attacker)) (VP (VBZ has) (NP (NP (NNS credentials)) (PP (IN for) (NP (CD one) (NN user))))))) (, ,) (NP (DT the) (JJ next) (NN stage)) (VP (VBZ begins) (SBAR (WHNP (WDT which)) (S (VP (VBZ is) (NP (JJ lateral) (NN traversal)))))) (. .))) </parse>
         <dependencies type="basic-dependencies">
           <dep type="root">
             <governor idx="0">ROOT</governor>
@@ -355,6 +377,10 @@
             <governor idx="5">credentials</governor>
             <dependent idx="8">user</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="13">begins</governor>
+            <dependent idx="9">,</dependent>
+          </dep>
           <dep type="det">
             <governor idx="12">stage</governor>
             <dependent idx="10">the</dependent>
@@ -382,6 +408,10 @@
           <dep type="ccomp">
             <governor idx="13">begins</governor>
             <dependent idx="17">traversal</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="13">begins</governor>
+            <dependent idx="18">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-dependencies">
@@ -421,6 +451,10 @@
             <governor idx="5">credentials</governor>
             <dependent idx="8">user</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="13">begins</governor>
+            <dependent idx="9">,</dependent>
+          </dep>
           <dep type="det">
             <governor idx="12">stage</governor>
             <dependent idx="10">the</dependent>
@@ -448,6 +482,10 @@
           <dep type="ccomp">
             <governor idx="13">begins</governor>
             <dependent idx="17">traversal</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="13">begins</governor>
+            <dependent idx="18">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-ccprocessed-dependencies">
@@ -487,6 +525,10 @@
             <governor idx="5">credentials</governor>
             <dependent idx="8">user</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="13">begins</governor>
+            <dependent idx="9">,</dependent>
+          </dep>
           <dep type="det">
             <governor idx="12">stage</governor>
             <dependent idx="10">the</dependent>
@@ -514,6 +556,10 @@
           <dep type="ccomp">
             <governor idx="13">begins</governor>
             <dependent idx="17">traversal</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="13">begins</governor>
+            <dependent idx="18">.</dependent>
           </dep>
         </dependencies>
       </sentence>
@@ -610,7 +656,6 @@
             <POS>.</POS>
           </token>
         </tokens>
-        <parse>(ROOT (S (NP (JJ Lateral) (NN traversal)) (VP (VBZ means) (NP (NN movement)) (PP (IN across) (NP (NP (DT a) (NN network)) (PP (IN between) (NP (NP (NNS systems)) (PP (IN as) (NP (DT the) (JJ same) (NN user) (NN identity)))))))) (. .))) </parse>
         <dependencies type="basic-dependencies">
           <dep type="root">
             <governor idx="0">ROOT</governor>
@@ -637,7 +682,7 @@
             <dependent idx="6">a</dependent>
           </dep>
           <dep type="nmod">
-            <governor idx="3">means</governor>
+            <governor idx="4">movement</governor>
             <dependent idx="7">network</dependent>
           </dep>
           <dep type="case">
@@ -665,8 +710,12 @@
             <dependent idx="13">user</dependent>
           </dep>
           <dep type="nmod">
-            <governor idx="9">systems</governor>
+            <governor idx="7">network</governor>
             <dependent idx="14">identity</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="3">means</governor>
+            <dependent idx="15">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-dependencies">
@@ -695,7 +744,7 @@
             <dependent idx="6">a</dependent>
           </dep>
           <dep type="nmod:across">
-            <governor idx="3">means</governor>
+            <governor idx="4">movement</governor>
             <dependent idx="7">network</dependent>
           </dep>
           <dep type="case">
@@ -723,8 +772,12 @@
             <dependent idx="13">user</dependent>
           </dep>
           <dep type="nmod:as">
-            <governor idx="9">systems</governor>
+            <governor idx="7">network</governor>
             <dependent idx="14">identity</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="3">means</governor>
+            <dependent idx="15">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-ccprocessed-dependencies">
@@ -753,7 +806,7 @@
             <dependent idx="6">a</dependent>
           </dep>
           <dep type="nmod:across">
-            <governor idx="3">means</governor>
+            <governor idx="4">movement</governor>
             <dependent idx="7">network</dependent>
           </dep>
           <dep type="case">
@@ -781,8 +834,12 @@
             <dependent idx="13">user</dependent>
           </dep>
           <dep type="nmod:as">
-            <governor idx="9">systems</governor>
+            <governor idx="7">network</governor>
             <dependent idx="14">identity</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="3">means</governor>
+            <dependent idx="15">.</dependent>
           </dep>
         </dependencies>
       </sentence>
@@ -903,7 +960,6 @@
             <POS>.</POS>
           </token>
         </tokens>
-        <parse>(ROOT (S (NP (DT The) (NN movement)) (VP (VBZ is) (VP (VBN considered) (S (ADJP (JJ lateral))) (, ,) (SBAR (IN as) (S (NP (DT the) (NN attacker)) (VP (VBZ has) (RB not) (VP (VBN gained) (NP (DT any) (JJ new) (, ,) (JJ elevated) (NNS privileges)) (ADVP (RB yet)))))))) (. .))) </parse>
         <dependencies type="basic-dependencies">
           <dep type="root">
             <governor idx="0">ROOT</governor>
@@ -924,6 +980,10 @@
           <dep type="xcomp">
             <governor idx="4">considered</governor>
             <dependent idx="5">lateral</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">considered</governor>
+            <dependent idx="6">,</dependent>
           </dep>
           <dep type="mark">
             <governor idx="12">gained</governor>
@@ -957,6 +1017,10 @@
             <governor idx="17">privileges</governor>
             <dependent idx="14">new</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="17">privileges</governor>
+            <dependent idx="15">,</dependent>
+          </dep>
           <dep type="amod">
             <governor idx="17">privileges</governor>
             <dependent idx="16">elevated</dependent>
@@ -968,6 +1032,10 @@
           <dep type="advmod">
             <governor idx="12">gained</governor>
             <dependent idx="18">yet</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">considered</governor>
+            <dependent idx="19">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-dependencies">
@@ -991,6 +1059,10 @@
             <governor idx="4">considered</governor>
             <dependent idx="5">lateral</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="4">considered</governor>
+            <dependent idx="6">,</dependent>
+          </dep>
           <dep type="mark">
             <governor idx="12">gained</governor>
             <dependent idx="7">as</dependent>
@@ -1023,6 +1095,10 @@
             <governor idx="17">privileges</governor>
             <dependent idx="14">new</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="17">privileges</governor>
+            <dependent idx="15">,</dependent>
+          </dep>
           <dep type="amod">
             <governor idx="17">privileges</governor>
             <dependent idx="16">elevated</dependent>
@@ -1034,6 +1110,10 @@
           <dep type="advmod">
             <governor idx="12">gained</governor>
             <dependent idx="18">yet</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">considered</governor>
+            <dependent idx="19">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-ccprocessed-dependencies">
@@ -1057,6 +1137,10 @@
             <governor idx="4">considered</governor>
             <dependent idx="5">lateral</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="4">considered</governor>
+            <dependent idx="6">,</dependent>
+          </dep>
           <dep type="mark">
             <governor idx="12">gained</governor>
             <dependent idx="7">as</dependent>
@@ -1089,6 +1173,10 @@
             <governor idx="17">privileges</governor>
             <dependent idx="14">new</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="17">privileges</governor>
+            <dependent idx="15">,</dependent>
+          </dep>
           <dep type="amod">
             <governor idx="17">privileges</governor>
             <dependent idx="16">elevated</dependent>
@@ -1100,6 +1188,10 @@
           <dep type="advmod">
             <governor idx="12">gained</governor>
             <dependent idx="18">yet</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">considered</governor>
+            <dependent idx="19">.</dependent>
           </dep>
         </dependencies>
       </sentence>
@@ -1226,7 +1318,6 @@
             <POS>.</POS>
           </token>
         </tokens>
-        <parse>(ROOT (S (ADVP (RB However)) (, ,) (NP (DT the) (NN attacker)) (VP (MD can) (VP (VB read) (NP (DT the) (NN memory)) (PP (IN on) (NP (NP (DT any) (NN system)) (SBAR (WHNP (WDT which)) (S (NP (PRP$ their) (VBN stolen) (NN user) (NN identity)) (VP (VBZ has) (NP (JJ administrative) (NNS privileges))))))))) (. .))) </parse>
         <dependencies type="basic-dependencies">
           <dep type="root">
             <governor idx="0">ROOT</governor>
@@ -1235,6 +1326,10 @@
           <dep type="advmod">
             <governor idx="6">read</governor>
             <dependent idx="1">However</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="6">read</governor>
+            <dependent idx="2">,</dependent>
           </dep>
           <dep type="det">
             <governor idx="4">attacker</governor>
@@ -1300,6 +1395,10 @@
             <governor idx="17">has</governor>
             <dependent idx="19">privileges</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="6">read</governor>
+            <dependent idx="20">.</dependent>
+          </dep>
         </dependencies>
         <dependencies type="collapsed-dependencies">
           <dep type="root">
@@ -1309,6 +1408,10 @@
           <dep type="advmod">
             <governor idx="6">read</governor>
             <dependent idx="1">However</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="6">read</governor>
+            <dependent idx="2">,</dependent>
           </dep>
           <dep type="det">
             <governor idx="4">attacker</governor>
@@ -1373,6 +1476,10 @@
           <dep type="dobj">
             <governor idx="17">has</governor>
             <dependent idx="19">privileges</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="6">read</governor>
+            <dependent idx="20">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-ccprocessed-dependencies">
@@ -1384,6 +1491,10 @@
             <governor idx="6">read</governor>
             <dependent idx="1">However</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="6">read</governor>
+            <dependent idx="2">,</dependent>
+          </dep>
           <dep type="det">
             <governor idx="4">attacker</governor>
             <dependent idx="3">the</dependent>
@@ -1447,6 +1558,10 @@
           <dep type="dobj">
             <governor idx="17">has</governor>
             <dependent idx="19">privileges</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="6">read</governor>
+            <dependent idx="20">.</dependent>
           </dep>
         </dependencies>
       </sentence>
@@ -1573,7 +1688,6 @@
             <POS>.</POS>
           </token>
         </tokens>
-        <parse>(ROOT (S (NP (NNPS Attackers)) (VP (MD will) (RB then) (VP (VB harvest) (NP (NP (NP (JJR more) (NNS credentials)) (PP (IN from) (NP (DT these) (NNS systems)))) (, ,) (CC and) (NP (NP (NN repeat)) (NP (DT the) (NN process)))) (SBAR (IN until) (S (NP (PRP they)) (VP (VBP gain) (NP (JJR higher) (NNS privileges))))))) (. .))) </parse>
         <dependencies type="basic-dependencies">
           <dep type="root">
             <governor idx="0">ROOT</governor>
@@ -1611,19 +1725,23 @@
             <governor idx="6">credentials</governor>
             <dependent idx="9">systems</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="4">harvest</governor>
+            <dependent idx="10">,</dependent>
+          </dep>
           <dep type="cc">
-            <governor idx="6">credentials</governor>
+            <governor idx="4">harvest</governor>
             <dependent idx="11">and</dependent>
           </dep>
           <dep type="conj">
-            <governor idx="6">credentials</governor>
+            <governor idx="4">harvest</governor>
             <dependent idx="12">repeat</dependent>
           </dep>
           <dep type="det">
             <governor idx="14">process</governor>
             <dependent idx="13">the</dependent>
           </dep>
-          <dep type="dep">
+          <dep type="dobj">
             <governor idx="12">repeat</governor>
             <dependent idx="14">process</dependent>
           </dep>
@@ -1636,7 +1754,7 @@
             <dependent idx="16">they</dependent>
           </dep>
           <dep type="advcl">
-            <governor idx="4">harvest</governor>
+            <governor idx="12">repeat</governor>
             <dependent idx="17">gain</dependent>
           </dep>
           <dep type="amod">
@@ -1646,6 +1764,10 @@
           <dep type="dobj">
             <governor idx="17">gain</governor>
             <dependent idx="19">privileges</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">harvest</governor>
+            <dependent idx="20">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-dependencies">
@@ -1685,19 +1807,23 @@
             <governor idx="6">credentials</governor>
             <dependent idx="9">systems</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="4">harvest</governor>
+            <dependent idx="10">,</dependent>
+          </dep>
           <dep type="cc">
-            <governor idx="6">credentials</governor>
+            <governor idx="4">harvest</governor>
             <dependent idx="11">and</dependent>
           </dep>
           <dep type="conj:and">
-            <governor idx="6">credentials</governor>
+            <governor idx="4">harvest</governor>
             <dependent idx="12">repeat</dependent>
           </dep>
           <dep type="det">
             <governor idx="14">process</governor>
             <dependent idx="13">the</dependent>
           </dep>
-          <dep type="dep">
+          <dep type="dobj">
             <governor idx="12">repeat</governor>
             <dependent idx="14">process</dependent>
           </dep>
@@ -1710,7 +1836,7 @@
             <dependent idx="16">they</dependent>
           </dep>
           <dep type="advcl">
-            <governor idx="4">harvest</governor>
+            <governor idx="12">repeat</governor>
             <dependent idx="17">gain</dependent>
           </dep>
           <dep type="amod">
@@ -1720,6 +1846,10 @@
           <dep type="dobj">
             <governor idx="17">gain</governor>
             <dependent idx="19">privileges</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">harvest</governor>
+            <dependent idx="20">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-ccprocessed-dependencies">
@@ -1759,23 +1889,23 @@
             <governor idx="6">credentials</governor>
             <dependent idx="9">systems</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="4">harvest</governor>
+            <dependent idx="10">,</dependent>
+          </dep>
           <dep type="cc">
-            <governor idx="6">credentials</governor>
+            <governor idx="4">harvest</governor>
             <dependent idx="11">and</dependent>
           </dep>
-          <dep type="dobj" extra="true">
-            <governor idx="4">harvest</governor>
-            <dependent idx="12">repeat</dependent>
-          </dep>
           <dep type="conj:and">
-            <governor idx="6">credentials</governor>
+            <governor idx="4">harvest</governor>
             <dependent idx="12">repeat</dependent>
           </dep>
           <dep type="det">
             <governor idx="14">process</governor>
             <dependent idx="13">the</dependent>
           </dep>
-          <dep type="dep">
+          <dep type="dobj">
             <governor idx="12">repeat</governor>
             <dependent idx="14">process</dependent>
           </dep>
@@ -1788,7 +1918,7 @@
             <dependent idx="16">they</dependent>
           </dep>
           <dep type="advcl">
-            <governor idx="4">harvest</governor>
+            <governor idx="12">repeat</governor>
             <dependent idx="17">gain</dependent>
           </dep>
           <dep type="amod">
@@ -1798,6 +1928,10 @@
           <dep type="dobj">
             <governor idx="17">gain</governor>
             <dependent idx="19">privileges</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">harvest</governor>
+            <dependent idx="20">.</dependent>
           </dep>
         </dependencies>
       </sentence>
@@ -1918,7 +2052,6 @@
             <POS>.</POS>
           </token>
         </tokens>
-        <parse>(ROOT (S (PP (VBN Given) (NP (NN time) (CC and) (NN persistence))) (, ,) (NP (DT an) (NN attacker)) (VP (MD can) (ADVP (RB often)) (VP (VB move) (ADVP (RB deeply)) (PP (IN into) (NP (NP (DT a) (NN network)) (CC and) (NP (NN gain) (JJ highly-privileged) (NNS accounts)))))) (. .))) </parse>
         <dependencies type="basic-dependencies">
           <dep type="root">
             <governor idx="0">ROOT</governor>
@@ -1939,6 +2072,10 @@
           <dep type="conj">
             <governor idx="2">time</governor>
             <dependent idx="4">persistence</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="10">move</governor>
+            <dependent idx="5">,</dependent>
           </dep>
           <dep type="det">
             <governor idx="7">attacker</governor>
@@ -1988,6 +2125,10 @@
             <governor idx="14">network</governor>
             <dependent idx="18">accounts</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="10">move</governor>
+            <dependent idx="19">.</dependent>
+          </dep>
         </dependencies>
         <dependencies type="collapsed-dependencies">
           <dep type="root">
@@ -2009,6 +2150,10 @@
           <dep type="conj:and">
             <governor idx="2">time</governor>
             <dependent idx="4">persistence</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="10">move</governor>
+            <dependent idx="5">,</dependent>
           </dep>
           <dep type="det">
             <governor idx="7">attacker</governor>
@@ -2058,6 +2203,10 @@
             <governor idx="14">network</governor>
             <dependent idx="18">accounts</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="10">move</governor>
+            <dependent idx="19">.</dependent>
+          </dep>
         </dependencies>
         <dependencies type="collapsed-ccprocessed-dependencies">
           <dep type="root">
@@ -2083,6 +2232,10 @@
           <dep type="nmod:given" extra="true">
             <governor idx="10">move</governor>
             <dependent idx="4">persistence</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="10">move</governor>
+            <dependent idx="5">,</dependent>
           </dep>
           <dep type="det">
             <governor idx="7">attacker</governor>
@@ -2135,6 +2288,10 @@
           <dep type="conj:and">
             <governor idx="14">network</governor>
             <dependent idx="18">accounts</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="10">move</governor>
+            <dependent idx="19">.</dependent>
           </dep>
         </dependencies>
       </sentence>
@@ -2219,7 +2376,6 @@
             <POS>.</POS>
           </token>
         </tokens>
-        <parse>(ROOT (S (NP (NP (CD One) (JJ possible) (NN solution)) (PP (TO to) (S (VP (VBG stopping) (NP (DT this) (NN problem)))))) (VP (VBZ is) (S (VP (TO to) (VP (ADVP (RB simply)) (VB disable) (NP (NNP SSO)))))) (. .))) </parse>
         <dependencies type="basic-dependencies">
           <dep type="root">
             <governor idx="0">ROOT</governor>
@@ -2268,6 +2424,10 @@
           <dep type="dobj">
             <governor idx="11">disable</governor>
             <dependent idx="12">SSO</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="8">is</governor>
+            <dependent idx="13">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-dependencies">
@@ -2319,6 +2479,10 @@
             <governor idx="11">disable</governor>
             <dependent idx="12">SSO</dependent>
           </dep>
+          <dep type="punct">
+            <governor idx="8">is</governor>
+            <dependent idx="13">.</dependent>
+          </dep>
         </dependencies>
         <dependencies type="collapsed-ccprocessed-dependencies">
           <dep type="root">
@@ -2368,6 +2532,10 @@
           <dep type="dobj">
             <governor idx="11">disable</governor>
             <dependent idx="12">SSO</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="8">is</governor>
+            <dependent idx="13">.</dependent>
           </dep>
         </dependencies>
       </sentence>
@@ -2560,7 +2728,6 @@
             <POS>.</POS>
           </token>
         </tokens>
-        <parse>(ROOT (S (S (NP (DT This) (NN solution)) (VP (VBZ is) (VP (VBN viewed) (PP (IN as) (ADJP (RB not) (JJ feasible))) (SBAR (IN as) (S (NP (NNS users)) (VP (MD can) (ADVP (RB still)) (VP (VB be) (VP (VBN tricked) (PP (IN into) (S (VP (VBG authenticating)))))))))))) (, ,) (S (NP (NN legacy) (NNS protocols)) (ADVP (RB still)) (VP (VBP have) (NP (JJ credential-equivalent) (NNS artifacts)))) (, ,) (CC and) (S (NP (PRP it)) (VP (VBZ 's) (NP (DT a) (JJ poor) (NN user) (NN experience)))) (. .))) </parse>
         <dependencies type="basic-dependencies">
           <dep type="root">
             <governor idx="0">ROOT</governor>
@@ -2611,7 +2778,7 @@
             <dependent idx="12">be</dependent>
           </dep>
           <dep type="advcl">
-            <governor idx="4">viewed</governor>
+            <governor idx="7">feasible</governor>
             <dependent idx="13">tricked</dependent>
           </dep>
           <dep type="mark">
@@ -2621,6 +2788,10 @@
           <dep type="advcl">
             <governor idx="13">tricked</governor>
             <dependent idx="15">authenticating</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">viewed</governor>
+            <dependent idx="16">,</dependent>
           </dep>
           <dep type="compound">
             <governor idx="18">protocols</governor>
@@ -2634,7 +2805,7 @@
             <governor idx="20">have</governor>
             <dependent idx="19">still</dependent>
           </dep>
-          <dep type="ccomp">
+          <dep type="parataxis">
             <governor idx="4">viewed</governor>
             <dependent idx="20">have</dependent>
           </dep>
@@ -2645,6 +2816,10 @@
           <dep type="dobj">
             <governor idx="20">have</governor>
             <dependent idx="22">artifacts</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">viewed</governor>
+            <dependent idx="23">,</dependent>
           </dep>
           <dep type="cc">
             <governor idx="4">viewed</governor>
@@ -2673,6 +2848,10 @@
           <dep type="conj">
             <governor idx="4">viewed</governor>
             <dependent idx="30">experience</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">viewed</governor>
+            <dependent idx="31">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-dependencies">
@@ -2725,7 +2904,7 @@
             <dependent idx="12">be</dependent>
           </dep>
           <dep type="advcl">
-            <governor idx="4">viewed</governor>
+            <governor idx="7">feasible</governor>
             <dependent idx="13">tricked</dependent>
           </dep>
           <dep type="mark">
@@ -2735,6 +2914,10 @@
           <dep type="advcl">
             <governor idx="13">tricked</governor>
             <dependent idx="15">authenticating</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">viewed</governor>
+            <dependent idx="16">,</dependent>
           </dep>
           <dep type="compound">
             <governor idx="18">protocols</governor>
@@ -2748,7 +2931,7 @@
             <governor idx="20">have</governor>
             <dependent idx="19">still</dependent>
           </dep>
-          <dep type="ccomp">
+          <dep type="parataxis">
             <governor idx="4">viewed</governor>
             <dependent idx="20">have</dependent>
           </dep>
@@ -2759,6 +2942,10 @@
           <dep type="dobj">
             <governor idx="20">have</governor>
             <dependent idx="22">artifacts</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">viewed</governor>
+            <dependent idx="23">,</dependent>
           </dep>
           <dep type="cc">
             <governor idx="4">viewed</governor>
@@ -2787,6 +2974,10 @@
           <dep type="conj:and">
             <governor idx="4">viewed</governor>
             <dependent idx="30">experience</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">viewed</governor>
+            <dependent idx="31">.</dependent>
           </dep>
         </dependencies>
         <dependencies type="collapsed-ccprocessed-dependencies">
@@ -2839,7 +3030,7 @@
             <dependent idx="12">be</dependent>
           </dep>
           <dep type="advcl">
-            <governor idx="4">viewed</governor>
+            <governor idx="7">feasible</governor>
             <dependent idx="13">tricked</dependent>
           </dep>
           <dep type="mark">
@@ -2849,6 +3040,10 @@
           <dep type="advcl">
             <governor idx="13">tricked</governor>
             <dependent idx="15">authenticating</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">viewed</governor>
+            <dependent idx="16">,</dependent>
           </dep>
           <dep type="compound">
             <governor idx="18">protocols</governor>
@@ -2862,7 +3057,7 @@
             <governor idx="20">have</governor>
             <dependent idx="19">still</dependent>
           </dep>
-          <dep type="ccomp">
+          <dep type="parataxis">
             <governor idx="4">viewed</governor>
             <dependent idx="20">have</dependent>
           </dep>
@@ -2873,6 +3068,10 @@
           <dep type="dobj">
             <governor idx="20">have</governor>
             <dependent idx="22">artifacts</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">viewed</governor>
+            <dependent idx="23">,</dependent>
           </dep>
           <dep type="cc">
             <governor idx="4">viewed</governor>
@@ -2901,6 +3100,10 @@
           <dep type="conj:and">
             <governor idx="4">viewed</governor>
             <dependent idx="30">experience</dependent>
+          </dep>
+          <dep type="punct">
+            <governor idx="4">viewed</governor>
+            <dependent idx="31">.</dependent>
           </dep>
         </dependencies>
       </sentence>

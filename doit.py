@@ -5,7 +5,7 @@ import xmltodict
 import json
 
 DEBUG = True
-JAVABUFFER = '-Xmx1500m'
+JAVABUFFER = '-Xmx2000m'
 INPUTFILE = 'input.txt'
 
 
@@ -72,7 +72,7 @@ def neural_network_parser():
     try:
         print "[+] Implementing Neural Network Parser...\n"
         model = 'edu/stanford/nlp/models/parser/nndep/english_UD.gz'
-        cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -parse.model ' + model + ' -file ' + INPUTFILE    
+        cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -parse.model ' + model + ' -file ' + INPUTFILE            
         run(cmd)  
         print "[+] Parsing completed\n"
     except:
