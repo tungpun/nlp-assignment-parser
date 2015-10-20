@@ -41,7 +41,7 @@ def lex_parser():
     Get input from INPUTFILE
     """
     try:
-        print "[+] Implementing Lexiclized Parser...\n"
+        print "[+] Implementing Lexiclized Parser (included dependency and constituent representation)...\n"
         cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -file ' + INPUTFILE    
         run(cmd)  
         print "[+] Parsing completed\n"
@@ -55,7 +55,7 @@ def shift_reduce():
     Get input from INPUTFILE
     """
     try:
-        print "[+] Implementing Shift Reduce Parser...\n"
+        print "[+] Implementing Shift Reduce Parser (included dependency and constituent representation)...\n"
         model = 'edu/stanford/nlp/models/srparser/englishSR.ser.gz'
         cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -parse.model ' + model + ' -file ' + INPUTFILE            
         run(cmd)  
@@ -70,9 +70,9 @@ def neural_network_parser():
     Get input from INPUTFILE
     """
     try:
-        print "[+] Implementing Neural Network Parser...\n"
+        print "[+] Implementing Neural Network Parser (included dependency representation)...\n"
         model = 'edu/stanford/nlp/models/parser/nndep/english_UD.gz'
-        cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -parse.model ' + model + ' -file ' + INPUTFILE            
+        cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,depparse -parse.model ' + model + ' -file ' + INPUTFILE            
         run(cmd)  
         print "[+] Parsing completed\n"
     except:
@@ -102,7 +102,7 @@ def get_parse_tree(data):
     return parsetrees 
 
 
-def read_output():
+def read_output(cmd):
     """
     Read output report from INPUTFILE.xml
     """  
@@ -111,8 +111,10 @@ def read_output():
         with open(OUTPUTFILE, 'r') as f:
             data = f.read()        
             if data == "":
-                raise Exception("Something wrongs ! Check log and report to developer!!!")        
+                raise Exception("Outfile is empty ! Check log and report to developer!!!")        
             print '[+] Output report is saved to', OUTPUTFILE, '. You can open with MS Excel for more detail or view a brief as below.'
+            if cmd == "nn":
+                return 0
             print "\n[+] Parse tree:"
             parsetrees = get_parse_tree(data)
             cnt = 0
@@ -131,13 +133,13 @@ if __name__ == '__main__':
     cmd = raw_input('Choose parser [lex/sr/nn]: ').strip()
     if cmd == 'sr':
         shift_reduce()
-        read_output()
+        read_output(cmd)
     elif cmd == 'lex':
         lex_parser()
-        read_output()
+        read_output(cmd)
     elif cmd == 'nn':
         neural_network_parser()
-        read_output()        
+        read_output(cmd)        
     else:
         print "Try again! Choose correct parser, please!"    
 
