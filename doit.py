@@ -37,11 +37,10 @@ def run(cmd):
 
 
 def lex_parser():
-    """
-    Get input from INPUTFILE
+    """Get input from INPUTFILE
     """
     try:
-        print "[+] Implementing Lexiclized Parser (included dependency and constituent representation)...\n"
+        print "[+] Implementing Lexiclized Parser (included Dependency and Context-Free-Grammar representation)...\n"
         cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -file ' + INPUTFILE    
         run(cmd)  
         print "[+] Parsing completed\n"
@@ -51,11 +50,10 @@ def lex_parser():
 
 
 def shift_reduce():
-    """
-    Get input from INPUTFILE
+    """Get input from INPUTFILE
     """
     try:
-        print "[+] Implementing Shift Reduce Parser (included dependency and constituent representation)...\n"
+        print "[+] Implementing Shift Reduce Parser (included Dependency and Context-Free-Grammar representation)...\n"
         model = 'edu/stanford/nlp/models/srparser/englishSR.ser.gz'
         cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -parse.model ' + model + ' -file ' + INPUTFILE            
         run(cmd)  
@@ -66,11 +64,10 @@ def shift_reduce():
 
 
 def neural_network_parser():
-    """
-    Get input from INPUTFILE
+    """Get input from INPUTFILE
     """
     try:
-        print "[+] Implementing Neural Network Parser (included dependency representation)...\n"
+        print "[+] Implementing Neural Network Parser (included Dependency representation)...\n"
         model = 'edu/stanford/nlp/models/parser/nndep/english_UD.gz'
         cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,depparse -parse.model ' + model + ' -file ' + INPUTFILE            
         run(cmd)  
@@ -81,8 +78,7 @@ def neural_network_parser():
 
 
 def get_parse_tree(data):
-    """
-    for parsing xml content to console
+    """for parsing xml content to console
     now, we just return parse tree
     """    
     parsetrees = []
@@ -102,9 +98,37 @@ def get_parse_tree(data):
     return parsetrees 
 
 
-def read_output(cmd):
+def gen_graph(line):
+    """Make parse tree look more beauty
     """
-    Read output report from INPUTFILE.xml
+
+    def gentab(tabsize):
+        return '|   '  * (tabsize - 1) +  '\-- '
+
+    line = line.replace(') ', ')')
+    tabsize = 0
+    graph = ''
+    line += '~'
+    for i in range(len(line) - 1):
+        c = line[i]
+        if c == '(':
+            tabsize += 1
+            graph += '\n'            
+            graph += '|   '  * (tabsize - 1) +  '\-- '
+            graph += c
+        elif c == ')':
+            tabsize -= 1
+            graph += ')'
+            if line[i+1] != '(':
+                graph += '\n'
+                graph += '|   '  * (tabsize - 1) +  '|   '
+        else:
+            graph += c   
+    return graph
+
+
+def read_output(cmd):
+    """Read output report from INPUTFILE.xml
     """  
     OUTPUTFILE = INPUTFILE + '.xml'    
     try:
@@ -119,7 +143,7 @@ def read_output(cmd):
             parsetrees = get_parse_tree(data)
             cnt = 0
             for parsetree in parsetrees:            
-                print '   [' + str(cnt) + ']', parsetree, '\n'
+                print '   [' + str(cnt) + ']', parsetree, gen_graph(parsetree), '\n'
                 cnt += 1
     except:
         raise Exception("Something wrongs ! Check log and report to developer!!!")
