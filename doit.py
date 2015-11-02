@@ -1,8 +1,9 @@
-#!/usr/bin python 2.7
+#!/usr/bin7 python 2.7
 
 import os
 import xmltodict
 import json
+import re
 
 DEBUG = True
 JAVABUFFER = '-Xmx2000m'
@@ -77,6 +78,20 @@ def neural_network_parser():
     return 0
 
 
+def vietnamese_pcfg():
+    """Get input from INPUTFILE
+    """
+    try:
+        print "[+] Implementing Vietnamese PCFG...\n"
+        model = 'edu/stanford/nlp/models/parser/nndep/english_UD.gz'
+        cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,depparse -parse.model VietNamesePCFG -file ' + INPUTFILE            
+        run(cmd)  
+        print "[+] Parsing completed\n"
+    except:
+        raise Exception('Failed. Quit now!!!')
+    return 0
+
+
 def get_parse_tree(data):
     """for parsing xml content to console
     now, we just return parse tree
@@ -105,7 +120,10 @@ def gen_graph(line):
     def gentab(tabsize):
         return '|   '  * (tabsize - 1) +  '\-- '
 
-    line = line.replace(') ', ')')
+    line = line.replace('  ', ' ')
+    line = line.replace(') ', ')')    
+    line = line.replace(' (', '(')
+    print "\n", line
     tabsize = 0
     graph = ''
     line += '~'
@@ -114,14 +132,18 @@ def gen_graph(line):
         if c == '(':
             tabsize += 1
             graph += '\n'            
-            graph += '|   '  * (tabsize - 1) +  '\-- '
-            graph += c
+            graph += '|   '  * (tabsize - 1) +  '|-- '
+            #graph += c
         elif c == ')':
             tabsize -= 1
+            """
             graph += ')'
             if line[i+1] != '(':
                 graph += '\n'
                 graph += '|   '  * (tabsize - 1) +  '|   '
+            """
+        elif c == ' ':
+            graph += ' --- '
         else:
             graph += c   
     return graph
@@ -140,11 +162,15 @@ def read_output(cmd):
             if cmd == "nn":
                 return 0
             print "\n[+] Parse tree:"
-            parsetrees = get_parse_tree(data)
-            cnt = 0
-            for parsetree in parsetrees:            
-                print '   [' + str(cnt) + ']', parsetree, gen_graph(parsetree), '\n'
-                cnt += 1
+            try:
+                parsetrees = get_parse_tree(data)            
+                cnt = 0
+                for parsetree in parsetrees:            
+                    print '   [' + str(cnt) + ']', parsetree, gen_graph(parsetree), '\n'
+                    cnt += 1
+            except:
+                print "     not available..."
+                pass
     except:
         raise Exception("Something wrongs ! Check log and report to developer!!!")
     return 0
@@ -153,17 +179,45 @@ def read_output(cmd):
 if __name__ == '__main__':    
     check_requirement()
     if DEBUG:
-        print_input()
-    cmd = raw_input('Choose parser [lex/sr/nn]: ').strip()
-    if cmd == 'sr':
-        shift_reduce()
-        read_output(cmd)
-    elif cmd == 'lex':
-        lex_parser()
-        read_output(cmd)
-    elif cmd == 'nn':
-        neural_network_parser()
-        read_output(cmd)        
-    else:
-        print "Try again! Choose correct parser, please!"    
+        print_input()    
+    promt_message = """
+       
+         .d8888b.                                      .d8888b.                      .d8888b.         d8888 
+        d88P  Y88b                                    d88P  Y88b                    d88P  Y88b       d88888 
+        888    888                                         .d88P                    888    888      d88P888 
+        888        888d888  .d88b.  888  888 88888b.      8888"                     888            d88P 888 
+        888  88888 888P"   d88""88b 888  888 888 "88b      "Y8b.                    888           d88P  888 
+        888    888 888     888  888 888  888 888  888 888    888       888888       888    888   d88P   888 
+        Y88b  d88P 888     Y88..88P Y88b 888 888 d88P Y88b  d88P                    Y88b  d88P  d8888888888 
+         "Y8888P88 888      "Y88P"   "Y88888 88888P"   "Y8888P"                      "Y8888P"  d88P     888 
+                                             888                                                            
+                                             888                            | Neutral Language Processing               
+                                             888                            | Parser Wrapper               
+
+    Select from the menu:
+        [1] Lexiclized Parser
+        [2] Shift Reduce Parser
+        [3] Neural Network Parser
+        [4] Vietnamese PCFG
+        [0] Quit Parser Wrapper
+
+    Parser Wrapper> """
+    while (True):
+        cmd = raw_input(promt_message).strip()
+        if cmd == '2':
+            shift_reduce()
+            read_output(cmd)
+        elif cmd == '1':
+            lex_parser()
+            read_output(cmd)
+        elif cmd == '3':
+            neural_network_parser()
+            read_output(cmd)        
+        elif cmd == '4':
+            vietnamese_pcfg()
+            read_output(cmd)        
+        elif cmd == '0':
+            quit()
+        else:
+            print "Try again! Type correct input, please!"    
 
