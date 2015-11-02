@@ -10,7 +10,7 @@ import random
 DEBUG = True
 JAVABUFFER = '-Xmx2000m'
 INPUTFILE = 'input.txt'
-
+OUTPUTFILE = INPUTFILE + '.xml'    
 
 def basic_color(code):    
     def inner(text, bold=True):
@@ -18,13 +18,6 @@ def basic_color(code):
         if bold:
             c = "1;%s" % c
         return "\033[%sm%s\033[0m" % (c, text)
-    return inner
-
-
-def term_color(code):    
-    def inner(text):
-        c = code
-        return "\033[38;5;%sm%s\033[0m" % (c, text)
     return inner
     
     
@@ -35,7 +28,24 @@ yellow = basic_color('33')
 blue = basic_color('34')
 magenta = basic_color('35')
 cyan = basic_color('36')
-tred = term_color('31')
+
+
+promt_message = cyan("""\n    Select from the menu:""") + blue("""
+        [1] Lexiclized Parser
+        [2] Shift Reduce Parser
+        [3] Neural Network Parser
+        [4] Vietnamese PCFG
+        [0] Quit Parser Wrappe\n\n""") + green("""    Parser Wrapper> """)
+
+
+def append_tabs(text, tabno):
+    """Append tabs into the head of each line in text
+    """
+    res = ''
+    lines = text.split('\n')
+    for line in lines:
+        res = res + tabno * ' ' * 4 + line + '\n'
+    return res
 
 
 def check_requirement():
@@ -47,10 +57,10 @@ def check_requirement():
 
 def print_input():
     try:
-        with open('input.txt', 'r') as f:
+        with open(INPUTFILE, 'r') as f:
             data = f.read()
             print cyan('[+] Input Data: ') + data.strip()[:200] + '...\n'        
-        with open('input.txt.xml', 'w') as f:
+        with open(OUTPUTFILE, 'w') as f:
             f.write("")
             print cyan('[+] Outfile cleaned:'), INPUTFILE + '.xml\n'        
     except Exception, e:
@@ -59,14 +69,13 @@ def print_input():
         raise Exception("IO Error! Check input file!")
 
 
-def run(cmd):
+def execute_command(cmd):
     try:
-        #print cmd.split(' ')
-        os.popen(cmd)
+        os.popen(cmd)        
     except Exception, e:
         if DEBUG:
             print e 
-        raise Exception("Error when try running ", cmd)
+        raise Exception("Error when try execute_command ", cmd)
 
 
 def lex_parser():
@@ -74,8 +83,8 @@ def lex_parser():
     """
     try:
         print cyan("[+] Implementing Lexiclized Parser (included Dependency and Context-Free-Grammar representation)...\n")
-        cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -file ' + INPUTFILE    
-        run(cmd)  
+        cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -file ' + INPUTFILE        
+        execute_command(cmd)  
         print cyan("[+] Parsing completed\n")
     except Exception, e:
         if DEBUG:
@@ -91,7 +100,7 @@ def shift_reduce():
         print cyan("[+] Implementing Shift Reduce Parser (included Dependency and Context-Free-Grammar representation)...\n")
         model = 'edu/stanford/nlp/models/srparser/englishSR.ser.gz'
         cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -parse.model ' + model + ' -file ' + INPUTFILE            
-        run(cmd)  
+        execute_command(cmd)  
         print cyan("[+] Parsing completed\n")
     except Exception, e:
         if DEBUG:
@@ -107,7 +116,7 @@ def neural_network_parser():
         print cyan("[+] Implementing Neural Network Parser (included Dependency representation)...\n")
         model = 'edu/stanford/nlp/models/parser/nndep/english_UD.gz'
         cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,depparse -parse.model ' + model + ' -file ' + INPUTFILE            
-        run(cmd)  
+        execute_command(cmd)  
         print cyan("[+] Parsing completed\n")
     except Exception, e:
         if DEBUG:
@@ -123,7 +132,7 @@ def vietnamese_pcfg():
         print cyan("[+] Implementing Vietnamese PCFG...\n")
         model = 'edu/stanford/nlp/models/parser/nndep/english_UD.gz'
         cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -parse.model VietNamesePCFG -file ' + INPUTFILE          
-        run(cmd)  
+        execute_command(cmd)  
         print cyan("[+] Parsing completed\n")
     except Exception, e:
         if DEBUG:
@@ -141,20 +150,55 @@ def get_parse_tree(data):
 
     datadict = xmltodict.parse(data)            
 
-    try:
-        for sentence in datadict['root']['document']['sentences']['sentence']:                    
-            s_id += 1
-            parsetrees.append(sentence['parse'])
-            # return json.dumps(datadict, indent=2)
+    try:        
+        isException = datadict['root']['document']['sentences']['sentence'][0] 
+        # when just oneline in input, datadict['root']['document']['sentences']['sentence'] is not a list, so, we try to make it throw exception
+        sentences = datadict['root']['document']['sentences']['sentence']        
     except:
-        parsetrees.append(datadict['root']['document']['sentences']['sentence']['parse'])      # when input just contains oneline
-        pass
+        sentences = []
+        sentences.append(datadict['root']['document']['sentences']['sentence'])
+        # make a new list have one element
+        pass    
+
+    for sentence in sentences:                    
+        s_id += 1        
+        
+        uncoll = []
+        for dep in sentence['dependencies'][0]['dep']:            
+            edge = str(dep['@type']) + ' ( ' + str(dep['governor']['@idx']) + '-' + str(dep['governor']['#text'].encode('utf-8')) + ' , ' + str(dep['dependent']['@idx']) + '-' + str(dep['dependent']['#text'].encode('utf-8')) + ' ) '                
+            uncoll.append(edge)
+
+        coll = []
+        for dep in sentence['dependencies'][1]['dep']:            
+            edge = str(dep['@type']) + ' ( ' + str(dep['governor']['@idx']) + '-' + str(dep['governor']['#text'].encode('utf-8')) + ' , ' + str(dep['dependent']['@idx']) + '-' + str(dep['dependent']['#text'].encode('utf-8')) + ' ) '                
+            coll.append(edge)           
+        
+        collcc = []
+        for dep in sentence['dependencies'][2]['dep']:            
+            edge = str(dep['@type']) + ' ( ' + str(dep['governor']['@idx']) + '-' + str(dep['governor']['#text'].encode('utf-8')) + ' , ' + str(dep['dependent']['@idx']) + '-' + str(dep['dependent']['#text'].encode('utf-8')) + ' ) '                
+            collcc.append(edge)           
+
+        try:
+            cfgParseTree = sentence['parse']
+        except:
+            cfgParseTree = "not available"
+            pass
+
+        try:
+            depParseTree = {'uncoll': uncoll, 'coll': coll, 'collcc': collcc}
+        except:
+            depParseTree = "not available"
+            pass
+
+        parsetree = {'cfg': cfgParseTree, 'dep': depParseTree}
+
+        parsetrees.append(parsetree)
 
     return parsetrees 
 
 
 def gen_graph(line):
-    """Make parse tree look more beauty
+    """Make CFG parse tree look more beauty
     """
 
     def gentab(tabsize):
@@ -186,40 +230,58 @@ def gen_graph(line):
             graph += ' --- '
         else:
             graph += c   
-    return graph
+    return append_tabs(graph, 3)
+
+
+def print_parse_tree(data):
+    """From data of output, display to console
+    """
+    print cyan("\n[+] Parse tree:")
+    try:
+        parsetrees = get_parse_tree(data)                   
+        cnt = 0
+        for parsetree in parsetrees:            
+            print magenta('   [' + str(cnt) + ']')
+
+            """ CFG Parse tree """
+            cfgParseTree = parsetree['cfg'].encode('utf-8')                    
+            
+            if len(cfgParseTree) > 16:
+                print yellow('        CFG Tree: ') + cfgParseTree, gen_graph(cfgParseTree), '\n'
+
+            """ Dep Parse Tree """                
+            print yellow('        Dep Tree: ')
+            print        '            Uncollapsed dependencies:'
+            for edge in parsetree['dep']['uncoll']:
+                print    '                 ' + edge
+            print        ''
+            print        '            Collapsed dependencies:'
+            for edge in parsetree['dep']['coll']:
+                print    '                 ' + edge
+            print        ''
+            print        '            Collapsed dependencies with CC processed:'
+            for edge in parsetree['dep']['coll']:
+                print    '                 ' + edge
+            print        ''
+            cnt += 1
+    except Exception, e:
+        if DEBUG:
+            print e        
+        pass
 
 
 def read_output(cmd):
     """Read output report from INPUTFILE.xml
-    """  
-    OUTPUTFILE = INPUTFILE + '.xml'    
+    """      
 
     try:
         with open(OUTPUTFILE, 'r') as f:
 
             data = f.read()        
-
             if data == "":
-                raise Exception("Outfile is empty ! Check log and report to developer!!!")        
-            
-            print cyan('[+] Output report is saved to' + OUTPUTFILE + '. You can open with MS Excel for more detail or view a brief as below.')
-            if cmd == "nn":
-                return 0
-            print cyan("\n[+] Parse tree:")
-
-            try:
-                parsetrees = get_parse_tree(data)                   
-                cnt = 0
-                for parsetree in parsetrees:            
-                    parsetree = parsetree.encode('utf-8')
-                    #print '   [' + str(cnt) + ']', parsetree.encode('utf-8'), '\n'
-                    print '   [' + str(cnt) + ']', parsetree, gen_graph(parsetree), '\n'
-                    cnt += 1
-            except Exception, e:
-                if DEBUG:
-                    print e
-                print "     not available..."
-                pass
+                raise Exception("Outfile is empty ! Check log and report to developer!!!")                
+            print cyan('[+] Output report is saved to ' + OUTPUTFILE + '. You can open with MS Excel for more detail or view a brief as below.')                    
+            print_parse_tree(data)
 
     except Exception, e:
         if DEBUG:
@@ -228,13 +290,6 @@ def read_output(cmd):
 
     return 0
 
-
-promt_message = cyan("""\n    Select from the menu:""") + blue("""
-        [1] Lexiclized Parser
-        [2] Shift Reduce Parser
-        [3] Neural Network Parser
-        [4] Vietnamese PCFG
-        [0] Quit Parser Wrappe\n\n""") + green("""    Parser Wrapper> """)
 
 def print_cover():
     os.system('clear')
@@ -258,8 +313,7 @@ def print_cover():
         print color(line)
     
 
-if __name__ == '__main__':    
-    
+if __name__ == '__main__':        
     print_cover()
     while (True):        
         check_requirement()
@@ -281,6 +335,6 @@ if __name__ == '__main__':
         elif cmd == '0':
             quit()
         else:
-            print_cover()
+            #print_cover()
             print magenta("[+] Try again! Type correct input, please!")
 
