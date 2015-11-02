@@ -260,8 +260,8 @@ def print_cover():
 
 if __name__ == '__main__':    
     
-    while (True):
-        print_cover()
+    print_cover()
+    while (True):        
         check_requirement()
         if DEBUG:
             print_input()    
@@ -281,5 +281,6 @@ if __name__ == '__main__':
         elif cmd == '0':
             quit()
         else:
-            print blue("Try again! Type correct input, please!")
+            print_cover()
+            print magenta("[+] Try again! Type correct input, please!")
 
