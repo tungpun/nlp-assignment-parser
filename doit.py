@@ -239,7 +239,7 @@ promt_message = cyan("""\n    Select from the menu:""") + blue("""
 def print_cover():
     os.system('clear')
     raw = ("""
-        
+
          .d8888b.                                      .d8888b.                      .d8888b.         d8888 
         d88P  Y88b                                    d88P  Y88b                    d88P  Y88b       d88888 
         888    888                                         .d88P                    888    888      d88P888 
@@ -259,11 +259,12 @@ def print_cover():
     
 
 if __name__ == '__main__':    
-    print_cover()
-    check_requirement()
-    if DEBUG:
-        print_input()    
+    
     while (True):
+        print_cover()
+        check_requirement()
+        if DEBUG:
+            print_input()    
         cmd = raw_input(promt_message).strip()
         if cmd == '2':
             shift_reduce()

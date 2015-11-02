@@ -18,7 +18,7 @@ Supported parsers:
 ```
 ~ python doit.py
 
-[+] Input Data: "By default, output files are written to the current directory.
+
 
          .d8888b.                                      .d8888b.                      .d8888b.         d8888
         d88P  Y88b                                    d88P  Y88b                    d88P  Y88b       d88888
@@ -31,6 +31,8 @@ Supported parsers:
                                              888
                                              888
                                              888
+[+] Input Data: "By default, output files are written to the current directory.
+[+] Outfile cleaned: input.txt.xml
 
     Select from the menu:
         [1] Lexiclized Parser
