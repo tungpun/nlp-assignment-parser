@@ -124,14 +124,30 @@ def neural_network_parser():
         raise Exception('Failed. Quit now!!!')
     return 0
 
+"""
+def vietnamese_pcfg():  
+    try:
+        print cyan("[+] Implementing Vietnamese PCFG...\n")
+        model = 'edu/stanford/nlp/models/parser/nndep/english_UD.gz'
+        cmd  = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -parse.model VietNamesePCFG.gz -file ' + INPUTFILE          
+        execute_command(cmd)  
+        print cyan("[+] Parsing completed\n")
+    except Exception, e:
+        if DEBUG:
+            print e 
+        raise Exception('Failed. Quit now!!!')
+    return 0
+"""
 
 def vietnamese_pcfg():
     """Get input from INPUTFILE
     """
     try:
-        print cyan("[+] Implementing Vietnamese PCFG...\n")
-        model = 'edu/stanford/nlp/models/parser/nndep/english_UD.gz'
-        cmd = 'java -cp "*" ' + JAVABUFFER + ' edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,parse -parse.model VietNamesePCFG -file ' + INPUTFILE          
+        print cyan("[+] Run vnTokenizer... and save result to tokenizered_data.txt\n")                            
+        cmd = "sh vnTokenizer.sh -i " + INPUTFILE + " -o tokenizered_data.txt"
+        execute_command(cmd)  
+        print cyan("[+] Run VietNamesePCFG parser\n")            
+        cmd = "sh vietnamesePCFG.sh tokenizered_data.txt > " + OUTPUTFILE
         execute_command(cmd)  
         print cyan("[+] Parsing completed\n")
     except Exception, e:
@@ -290,6 +306,22 @@ def read_output(cmd):
 
     return 0
 
+def read_parser_output(cmd):
+    """Read output report from INPUTFILE.xml
+    """      
+
+    try:
+        with open(OUTPUTFILE, 'r') as f:
+
+            data = f.read()                    
+            print data
+
+    except Exception, e:
+        if DEBUG:
+            print e        
+        raise Exception("Something wrongs ! Check log and report to developer!!!")
+
+    return 0
 
 def print_cover():
     os.system('clear')
@@ -331,10 +363,10 @@ if __name__ == '__main__':
             read_output(cmd)        
         elif cmd == '4':
             vietnamese_pcfg()
-            read_output(cmd)        
+            read_parser_output(cmd)        
         elif cmd == '0':
             quit()
         else:
-            #print_cover()
+            print_cover()
             print magenta("[+] Try again! Type correct input, please!")
 

@@ -1,6 +1,4 @@
-<!-- build.xml file for ant for Stanford CoreNLP -->
-
-<!-- Before using this, unjar the sources' jar file into the src/ directory! -->
+<!-- build.xml file for ant for JavaNLP -->
 
 <!-- A "project" describes a set of targets that may be requested
      when Ant is executed.  The "default" attribute defines the
@@ -10,11 +8,13 @@
      set to the current working directory.
 -->
 
-<project name="StanfordCoreNLP" default="compile" basedir=".">
+<project name="JavaNLP" default="compile" basedir=".">
 
   <property name="build.home"    value="${basedir}/classes"/>
   <property name="build.tests"    value="${basedir}/classes"/>
+  <property name="docs.home"     value="${basedir}/docs"/>
   <property name="src.home"      value="${basedir}/src"/>
+  <property name="javadoc.home"  value="${basedir}/javadoc"/>
 
 
 <!--  ==================== Compilation Control Options ==================== -->
@@ -38,7 +38,6 @@
 
   <property name="compile.debug"       value="true"/>
   <property name="compile.deprecation" value="false"/>
-  <property name="compile.encoding"    value="utf-8" />
   <property name="compile.optimize"    value="true"/>
   <property name="compile.source"      value="1.8" />
   <property name="compile.target"      value="1.8" />
@@ -74,6 +73,27 @@
   </target>
 
 
+<!-- ==================== Classpath Targets ==================================== -->
+
+<!--
+
+  Sets the classpath for this project properly. We now always use the
+  lib dir within javanlp.
+
+-->
+
+  <target name="classpath" description="Sets the classpath">
+      <path id="compile.classpath">
+        <fileset dir="${basedir}">
+          <include name="*.jar"/>
+          <exclude name="stanford-parser*"/>
+        </fileset>
+      </path>
+  </target>
+
+
+
+
 
 <!-- ==================== Compile Target ================================== -->
 
@@ -86,7 +106,7 @@
 
 -->
 
-  <target name="compile" depends="prepare"
+  <target name="compile" depends="prepare,classpath"
    description="Compile Java sources">
 
     <!-- Compile Java classes as necessary -->
@@ -94,21 +114,56 @@
     <javac srcdir="${src.home}"
           destdir="${build.home}"
             debug="${compile.debug}"
+         encoding="utf-8" 
       deprecation="${compile.deprecation}"
-         encoding="${compile.encoding}" 
          optimize="${compile.optimize}"
 	   source="${compile.source}"
-           target="${compile.target}">
+           target="${compile.target}"
+includeantruntime="false">
+        <classpath refid="compile.classpath"/>
       <compilerarg value="-Xmaxerrs"/>
       <compilerarg value="20"/>
-      <classpath>
-        <fileset dir="${basedir}">
-          <include name="*.jar"/>
-          <exclude name="stanford-corenlp*"/>
-        </fileset>
-      </classpath>
       <!-- <compilerarg value="-Xlint"/> -->
     </javac>
+
+    <!-- Copy application resources -->
+<!--
+    <copy  todir="${build.home}/WEB-INF/classes">
+      <fileset dir="${src.home}" excludes="**/*.java"/>
+    </copy>
+-->
+
+  </target>
+
+
+<!-- ==================== Javadoc Target ================================== -->
+
+<!--
+
+  The "javadoc" target creates Javadoc API documentation for the Java
+  classes included in your application.  Normally, this is only required
+  when preparing a distribution release, but is available as a separate
+  target in case the developer wants to create Javadocs independently.
+
+-->
+
+  <target name="javadoc" depends="compile"
+   description="Create Javadoc API documentation">
+
+    <mkdir          dir="${javadoc.home}"/>
+    <javadoc sourcepath="${src.home}"
+                destdir="${javadoc.home}"
+              maxmemory="768m"
+                 author="true"
+                 source="1.6"
+                Overview="${src.home}/edu/stanford/nlp/overview.html"
+                Doctitle="Stanford JavaNLP API Documentation"
+             Windowtitle="Stanford JavaNLP API"
+           packagenames="*">
+      <bottom><![CDATA[<FONT SIZE=2><A HREF=\"http://nlp.stanford.edu\">Stanford NLP Group</A></FONT>]]></bottom>
+      <link href="http://java.sun.com/j2se/1.6.0/docs/api/"/>
+    </javadoc>
+
   </target>
 
 
